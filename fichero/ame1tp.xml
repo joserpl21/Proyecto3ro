@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<vehiculos>
+<vehiculo matricula="6574-456">
+<modelo>Seat</modelo>
+<anio>2000</anio>
+<propietario>
+<nombre>Irene</nombre>
+<apellido>Yera</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="6598-CPL">
+<modelo>Seat Leon</modelo>
+<anio>2003</anio>
+<propietario>
+<nombre>Irene</nombre>
+<apellido>López</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="2250-HKL">
+<modelo>BMW Serie 3</modelo>
+<anio>2012</anio>
+<propietario>
+<nombre>Irene</nombre>
+<apellido>López</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="2145-HNT">
+<modelo>Skoda Octavia</modelo>
+<anio>2013</anio>
+<propietario>
+<nombre>Marta</nombre>
+<apellido>Pérez</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="0112-HRX">
+<modelo>Alfa Romeo 4C</modelo>
+<anio>2013</anio>
+<propietario>
+<nombre>Irene</nombre>
+<apellido>López</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="5285-HVR">
+<modelo>Suzuki Vitara</modelo>
+<anio>2014</anio>
+<propietario>
+<nombre>Pedro</nombre>
+<apellido>Jimenez</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="2589-JFX">
+<modelo>Peugeot 208</modelo>
+<anio>2015</anio>
+<propietario>
+<nombre>Marta</nombre>
+<apellido>Pérez</apellido>
+</propietario>
+</vehiculo>
+</vehiculos>

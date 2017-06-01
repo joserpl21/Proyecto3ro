@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<vehiculos>
+<vehiculo matricula="2145-HNT">
+<modelo>Skoda Octavia</modelo>
+<anio>2013</anio>
+<propietario>
+<nombre>Marta</nombre>
+<apellido>Pérez</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="5285-HVR">
+<modelo>Suzuki Vitara</modelo>
+<anio>2014</anio>
+<propietario>
+<nombre>Pedro</nombre>
+<apellido>Jimenez</apellido>
+</propietario>
+</vehiculo>
+<vehiculo matricula="2589-JFX">
+<modelo>Peugeot 208</modelo>
+<anio>2015</anio>
+<propietario>
+<nombre>Marta</nombre>
+<apellido>Pérez</apellido>
+</propietario>
+</vehiculo>
+</vehiculos>

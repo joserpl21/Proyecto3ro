@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<prueba2s>
+  <vehiculo>
+    <matricula>2250-HKL</matricula>
+    <modelo>BMW Serie 3</modelo>
+    <anio>2012</anio>
+  </vehiculo>
+  <vehiculo>
+    <matricula>2589-JFX</matricula>
+    <modelo>Peugeot 208</modelo>
+    <anio>2015</anio>
+  </vehiculo>
+  <vehiculo>
+    <matricula>4561-LJE</matricula>
+    <modelo>OMEGA 8s</modelo>
+    <anio>2017</anio>
+  </vehiculo>
+  <vehiculo>
+    <matricula>5285-HVR</matricula>
+    <modelo>Suzuki Vitara</modelo>
+    <anio>2014</anio>
+  </vehiculo>
+  <vehiculo>
+    <matricula>5896-FNM</matricula>
+    <modelo>Peugeot 207</modelo>
+    <anio>2007</anio>
+  </vehiculo>
+  <vehiculo>
+    <matricula>6598-CPL</matricula>
+    <modelo>Seat Leon</modelo>
+    <anio>2003</anio>
+  </vehiculo>
+</prueba2s>
