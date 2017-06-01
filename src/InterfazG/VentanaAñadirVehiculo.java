@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package InterfazG;
 
 import Modelo.DataBaseSegura;
@@ -13,7 +9,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Alumno
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanaAñadirVehiculo extends javax.swing.JFrame {
 
@@ -23,7 +19,11 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
     JFrame padre;
     Vehiculo a;
     Propietario p;
-
+    /**
+     * Constructor
+     * @param padre recibe un JFrame padre 
+     * inicializa un nuevo objeto de la clase padre
+     */
     public VentanaAñadirVehiculo(JFrame padre) {
         a = new Vehiculo();
         this.padre = padre;
@@ -186,10 +186,12 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Cuando se esta cerrando hace visible la ventana de JFrame padre
         padre.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void jbVoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoverActionPerformed
+        //Cuando se esta cerrando hace visible la ventana de JFrame padre
         padre.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jbVoverActionPerformed
@@ -212,7 +214,11 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
 
     private void jbAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnadirActionPerformed
         try {
-           
+           /**
+            * Este boton comprueba que sean metido caracteres en el JTextFiel para luego buscar al propietario mediante este si 
+            * no lo encuentra lanzara el error guardado en el Metodo busca propitario si lo encuentra guardara comprovando 
+            * todos los Setters de las variables de propietario en la base de datos y luego limpiara la pantalla
+            */
                 String dni = tfPropietario.getText();
                 if (dni.length() > 0) {
                     try {
@@ -236,8 +242,7 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
                         } catch (MyError ex) {
                             VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
                         }
-                    }
-                
+                    }     
             } else {
                 VentanaNotificaciones.ventanaError("ERROR AL INTRODUCIR LOS DATOS", padre);
             }
@@ -260,7 +265,9 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
     private javax.swing.JTextField tfModelo;
     private javax.swing.JTextField tfPropietario;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Limpia todos los Setters e inicializa a un nuevo vehiculo y propietario
+     */
     private void limpiaPalla() {
         tfAnio.setText("");
         tfMatricula.setText("");

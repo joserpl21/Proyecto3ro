@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package InterfazG;
 
 import Modelo.DataBaseSegura;
@@ -13,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author USUARIO
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanaAñadirPropietario extends javax.swing.JFrame {
 
@@ -21,6 +16,12 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
     Propietario p;
     Vehiculo v;
 
+    /**
+     * Constructor que recibe un JFrame inicializa a un Propietario y a un
+     * vehiculo
+     *
+     * @param padre
+     */
     public VentanaAñadirPropietario(JFrame padre) {
         p = new Propietario();
         v = new Vehiculo();
@@ -232,6 +233,14 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
 
     private void jbAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAñadirActionPerformed
         try {
+            /**
+             * Este boton rellena al propietario con todos los texfiel dando los
+             * valores adecuados, si algun valor seria incorrecto lanzara el
+             * mensaje error guardado en los Setters de las variables del
+             * propietario luego guarda al propietario en la base de datos con
+             * el metodo guardaPropietario finalmente limpia los JTextField
+             * permitiendo poder ingresar a otro propietario si se diera el caso
+             */
             p.setDni(tfDni.getText());
             p.setNombre(tfNombre.getText());
             p.setApellido(tfApellido.getText());
@@ -239,8 +248,8 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
             p.setProvincia(tfProvincia.getText());
             DataBaseSegura.guardaPropietario(p);
 //            if (p.getNombre().equals("") || p.getNombre().equals("") || p.) {
-                VentanaNotificaciones.ventanaOK("ALTA CORRECTA", padre);
-           
+            VentanaNotificaciones.ventanaOK("ALTA CORRECTA", padre);
+
             lipiarPatalla();
         } catch (MyError ex) {
             VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
@@ -248,11 +257,13 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAñadirActionPerformed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
+        //Cada vez que el boton volver sea ejecutado mostrara la ventana del JFrame padre y esta se ocultara
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Cuando se esta cerrando mostrara la ventana del JFrame padre
         padre.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
@@ -275,6 +286,7 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void lipiarPatalla() {
+        //Limpia los JTextField y inicaializa a un nuevo propieatario y vahiculo
         tfApellido.setText("");
         tfDni.setText("");
         tfNombre.setText("");

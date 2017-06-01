@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Alumno
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanaBajaPropietario extends javax.swing.JFrame {
 
@@ -27,7 +27,10 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
     ArrayList<Vehiculo> listaVehiculos;
     int n = 0, j = 0;
     boolean flag = false;
-
+    /**
+     * 
+     * @param padre recive el JFrame de la ventana principal 
+     */
     public VentanaBajaPropietario(JFrame padre) {
         this.padre = padre;
         initComponents();
@@ -251,7 +254,11 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
 
     private void jfDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jfDniFocusLost
         try {
-
+            /**
+             * Comprueba que el dni introducido en el primer JTextFiel exista luego agrega a esos valores al objeto inicizalizado, por ultimo 
+             * rellena los otros JTextField con sus datos si no habria ningun propietario con ese DNI lanzara un mensaje si habria algun error en 
+             * el metodo de la base de datos lanzara el error guardado.
+             */
             p = DataBaseSegura.buscaPropietario(jfDni.getText());
             if (p != null) {
                 limpiaTabla();
@@ -269,27 +276,34 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
     }//GEN-LAST:event_jfDniFocusLost
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        /**
+         * Permite que la ventana principal sea visible 
+         */
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_formWindowClosed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
+        /**
+         * Permite que la ventana principal sea visible 
+         */
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        tfNombre.setText("");
-        tfApeliido.setText("");
-        tfTelefono.setText("");
-        tfProvincia.setText("");
-        jfDni.setText("");
-        p = new Propietario();
+        /*
+        Este boton limpia todos los textField con la tabala e incializa a otro propietario 
+        */
         limpiaTabla();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbElimVehiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbElimVehiActionPerformed
         try {
+            /**
+             * Este boton elimina los vehiculos del propieatario comprovando que exista luego limpiara la pantalla 
+             * y lanzara true en la variable booelan flag que permitira eliminar al propietario
+             */
             jbElimVehi.requestFocus();
             n = DataBaseSegura.eliminarVehiculo(p.getDni());
             if (n != 0) {
@@ -310,6 +324,10 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
 
     private void jbEliminarPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarPropActionPerformed
         try {
+            /*
+            Si el propietario no es nulo y la variable flag es true osea que no el propietario no tiene vehiculos permitira eliminar al propietario
+            lanzando todos los errores que puedan existir
+            */
             jbEliminarProp.requestFocus();
             if (p != null) {
                 if (flag == true) {
@@ -329,10 +347,6 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
             VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
         }
     }//GEN-LAST:event_jbEliminarPropActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -356,7 +370,12 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
     private javax.swing.JTextField tfProvincia;
     private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Este metodo recive el dni del propietario luego ejecuta el metodo de la clase BaseDataSegura que permite sacar la lista de vehiculos que tiene 
+     * el propieatario si no tiene ninguno se lanza el mensaje y si los tiene rellenara la tabla con los vehiculos
+     * @param dni
+     * @throws MyError 
+     */
     private void rellenaTabla(String dni) throws MyError {
         DefaultTableModel tabla = (DefaultTableModel) jtTablaVehiculos.getModel();
         listaVehiculos = DataBaseSegura.listaVehiculosPro(dni);
@@ -369,19 +388,24 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
             }
         }
     }
-
+/**
+ * limpia la tabla 
+ */
     private void limpiaTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) jtTablaVehiculos.getModel();
         while (modeloTabla.getRowCount() >= 1) {
             modeloTabla.removeRow(0);
         }
     }
-
+    /**
+     * Limpia todos los JTextField e inicializa a un nuevo propietario
+     */
     private void limpiaPantalla() {
         tfApeliido.setText("");
         tfNombre.setText("");
         tfProvincia.setText("");
         tfTelefono.setText("");
         jfDni.setText("");
+        p=new Propietario();
     }
 }

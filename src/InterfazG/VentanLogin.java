@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package InterfazG;
 
 import Modelo.DataBaseSegura;
@@ -10,7 +5,7 @@ import controlador.MyError;
 
 /**
  *
- * @author Alumno
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanLogin extends javax.swing.JFrame {
 
@@ -120,6 +115,10 @@ public class VentanLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarActionPerformed
+        /**
+         * Este boton permite que una ves introducido un usuario y contraseña correctas abrir la base de datos y mostrar la ventana principal
+         * mediante los metodos abrirConexion , si habria algun error se lanzaria todos los errores guardados en cada parte de los metodos.
+         */
         boolean b;
         try {
             char[] entrada = jpfContraseña.getPassword();
@@ -144,7 +143,11 @@ public class VentanLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jbIngresarActionPerformed
 
     private void jpfContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfContraseñaActionPerformed
-        boolean b;
+        /**
+         * Esta accion permite que una ves introducido un usuario y contraseña correctas abrir la base de datos y mostrar la ventana principal
+         * mediante los metodos abrirConexion , si habria algun error se lanzaria todos los errores guardados en cada parte de los metodos.
+         */
+        boolean b;        
         try {
             char[] entrada = jpfContraseña.getPassword();
             String p = new String(entrada);
@@ -209,7 +212,9 @@ public class VentanLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField jpfContraseña;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Metodo que limpia los JTextField utilizados
+     */
     private void limpiaPantalla() {
         tfUsuario.setText("");
         jpfContraseña.setText("");

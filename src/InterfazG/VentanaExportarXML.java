@@ -29,6 +29,12 @@ public class VentanaExportarXML extends javax.swing.JFrame {
     JFrame padre;
     ArrayList<Vehiculo> listaVehiculos;
     ArrayList<Propietario> listaPropietario;
+    /**
+     * Cosntructor que recive el JFrame de la ventana principal y el arraylist de todos los propietarios junto con el arraylist de todos los vehiculos
+     * @param padre
+     * @param listaV
+     * @param listap 
+     */
 
     public VentanaExportarXML(JFrame padre, ArrayList listaV, ArrayList listap) {
         this.padre = padre;
@@ -129,6 +135,7 @@ public class VentanaExportarXML extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       //Escribe 
         String nombre = tfNombreDocumento.getText();
         DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
@@ -177,12 +184,8 @@ public class VentanaExportarXML extends javax.swing.JFrame {
             }
             VentanaNotificaciones.ventanaOK("EXPORTACION EXITOSA", padre);
             limpiaPantalla();
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(VentanaExportarXML.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(VentanaExportarXML.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(VentanaExportarXML.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException | TransformerException ex) {
+            VentanaNotificaciones.ventanaOK("Error al escribir el documento XML", padre);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
