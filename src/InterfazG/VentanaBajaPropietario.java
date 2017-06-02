@@ -7,7 +7,7 @@ package InterfazG;
 
 import Modelo.DataBaseSegura;
 import Modelo.Propietario;
-import Modelo.Vehiculo;
+import Modelo.Vehículo;
 import controlador.MyError;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -24,7 +24,7 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
      */
     JFrame padre;
     Propietario p;
-    ArrayList<Vehiculo> listaVehiculos;
+    ArrayList<Vehículo> listaVehiculos;
     int n = 0, j = 0;
     boolean flag = false;
     /**
@@ -383,7 +383,7 @@ public class VentanaBajaPropietario extends javax.swing.JFrame {
             VentanaNotificaciones.ventanaOK("No tiene vehiculos registrados", padre);
             flag = true;
         } else {
-            for (Vehiculo v : listaVehiculos) {
+            for (Vehículo v : listaVehiculos) {
                 tabla.addRow(v.toArray());
             }
         }

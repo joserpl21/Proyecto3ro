@@ -1,21 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package InterfazG;
 
 import Modelo.DataBaseSegura;
 import Modelo.Propietario;
 import controlador.MyError;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Alumno
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanaListaPropietarios extends javax.swing.JFrame {
 
@@ -25,16 +20,17 @@ public class VentanaListaPropietarios extends javax.swing.JFrame {
     JFrame padre;
     ArrayList<Propietario> listaProp;
     ArrayList<String> listaProvin;
+    /**
+     * Constructor que recive el JFrame de la ventana padre
+     * @param padre recive JFrame de la ventana principal
+     * @param propie arraylist de propietarios recive a todos los propietarios 
+     * e rellena la tabla con todo sus datos
+     */
 
     public VentanaListaPropietarios(JFrame padre, ArrayList<Propietario> propie) {
         this.listaProp = propie;
         this.padre = padre;
         setVisible(true);
-        // Obtener las provincias de BBD
-        /* misProvincias.add("Zaragoza");
-          misProvincias.add("Huesca");
-            misProvincias.add("Teruel");
-        datos = new ComboBoxModel(misProvincias);*/
         initComponents();
         rellenaTabla();
     }
@@ -204,17 +200,24 @@ public class VentanaListaPropietarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Hace al JFrame de la ventana prinicipal visible
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_formWindowClosed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
+        //Hace al JFrame de la ventana prinicipal visible
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProvinciaActionPerformed
         try {
+            /**
+             * Cada vez que dan a este boton limpia la tabla y mediante el JTextField provincia llama al metodo de la clase DataBaseSegura
+             * para sacar la lista de todos los propietarios que tengan esa propvincia, si habria alguna error guardado en los metodos 
+             * lo lanza.
+             */
             limpiaTabla();
             listaProp = DataBaseSegura.listaPropietariosProvincia(tfProvincia.getText());
             rellenaTabla();
@@ -227,6 +230,11 @@ public class VentanaListaPropietarios extends javax.swing.JFrame {
 
     private void jbNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNumeroActionPerformed
         try {
+            /**
+             * Cada vez que dan a este boton limpia la tabla y mediante el JTextField numero llama al metodo de la clase DataBaseSegura
+             * para sacar la lista de todos los propietarios que tengan ese numerdo de vehiculos , si habria alguna error guardado en los metodos 
+             * lo lanza.
+             */
             limpiaTabla();
             listaProp = DataBaseSegura.listaPropietariosNumeroDeCoches(Integer.parseInt(tfNumero.getText()));
             rellenaTabla();
@@ -239,6 +247,11 @@ public class VentanaListaPropietarios extends javax.swing.JFrame {
 
     private void jbDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDosActionPerformed
         try {
+              /**
+             * Cada vez que dan a este boton limpia la tabla y mediante el JTextField numero y el JTextField provincia rellena el ArrayList con el metodo de la clase DataBaseSegura
+             * para sacar la lista de todos los propietarios que tengan ese numerod de vehiculos y esten en esa provincia , si habria alguna error guardado en los metodos 
+             * lo lanza.
+             */
             limpiaTabla();
             listaProp = DataBaseSegura.listaPropietarios(tfProvincia.getText(), Integer.parseInt(tfNumero.getText()));
             rellenaTabla();
@@ -265,6 +278,9 @@ public class VentanaListaPropietarios extends javax.swing.JFrame {
     private javax.swing.JTextField tfProvincia;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * rellena la tabla con el ArrayList listaProp 
+     */
     private void rellenaTabla() {
         DefaultTableModel tablaP = (DefaultTableModel) jtLista.getModel();
         for (Propietario p : listaProp) {
@@ -272,7 +288,9 @@ public class VentanaListaPropietarios extends javax.swing.JFrame {
             tablaP.addRow(p.toArray());
         }
     }
-
+    /**
+     * limpia la tabla
+     */
     private void limpiaTabla() {
         DefaultTableModel tablaP = (DefaultTableModel) jtLista.getModel();
         while (tablaP.getRowCount() >= 1) {

@@ -2,7 +2,7 @@ package InterfazG;
 
 import Modelo.DataBaseSegura;
 import Modelo.Propietario;
-import Modelo.Vehiculo;
+import Modelo.Vehículo;
 import controlador.MyError;
 import javax.swing.JFrame;
 
@@ -14,7 +14,7 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
 
     JFrame padre;
     Propietario p;
-    Vehiculo v;
+    Vehículo v;
 
     /**
      * Constructor que recibe un JFrame inicializa a un Propietario y a un
@@ -24,7 +24,7 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
      */
     public VentanaAñadirPropietario(JFrame padre) {
         p = new Propietario();
-        v = new Vehiculo();
+        v = new Vehículo();
         this.padre = padre;
         initComponents();
         setVisible(true);
@@ -293,6 +293,6 @@ public class VentanaAñadirPropietario extends javax.swing.JFrame {
         tfProvincia.setText("");
         tfTelefono.setText("");
         p = new Propietario();
-        v = new Vehiculo();
+        v = new Vehículo();
     }
 }

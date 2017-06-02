@@ -5,11 +5,8 @@
  */
 package InterfazG;
 
-import Modelo.DataBaseSegura;
 import Modelo.Propietario;
-import controlador.MyError;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,8 +53,6 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtLista = new javax.swing.JTable();
-        jcmbProvincia = new javax.swing.JComboBox<>();
-        jcmbNumero = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jbVolver = new javax.swing.JButton();
@@ -90,20 +85,6 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtLista);
 
-        jcmbProvincia.setModel(new DefaultComboBoxModel<String>(creaModeloComobo()));
-        jcmbProvincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcmbProvinciaActionPerformed(evt);
-            }
-        });
-
-        jcmbNumero.setModel(new DefaultComboBoxModel<String>(creaModeloComoboNumeros()));
-        jcmbNumero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcmbNumeroActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("PROVINCIA");
 
         jLabel3.setText("NUMERO");
@@ -135,13 +116,9 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jcmbProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jcmbNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel3)
                 .addGap(120, 120, 120))
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,11 +130,7 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcmbNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcmbProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbVolver)
@@ -190,38 +163,6 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
 
-    private void jcmbNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbNumeroActionPerformed
-        limpiaTabla();
-        try {
-            listaProp = DataBaseSegura.listaPropietarios(jcmbProvincia.getSelectedItem().toString(), Integer.parseInt(jcmbNumero.getSelectedItem().toString()));
-            
-        } catch (MyError ex) {
-            VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
-        }
-        if (!listaProp.isEmpty()) {
-            rellenaTabla();
-        } else {
-            VentanaNotificaciones.ventanaError("NO HAY PROPIETARIOS", padre);
-        }
-    }//GEN-LAST:event_jcmbNumeroActionPerformed
-
-    private void jcmbProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbProvinciaActionPerformed
-        limpiaTabla();
-        try {
-//////            System.out.println(jcmbProvincia.getSelectedItem().toString());
-//            System.out.println(Integer.parseInt(jcmbNumero.getSelectedItem().toString()));
-            listaProp = DataBaseSegura.listaPropietarios(jcmbProvincia.getSelectedItem().toString(), Integer.parseInt(jcmbNumero.getSelectedItem().toString()));
-            if (!listaProp.isEmpty()) {
-                rellenaTabla();
-            } else {
-                VentanaNotificaciones.ventanaError("NO HAY PROPIETARIOS", padre);
-            }
-        } catch (MyError ex) {
-            VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
-        }
-
-    }//GEN-LAST:event_jcmbProvinciaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -233,8 +174,6 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbVolver;
-    private javax.swing.JComboBox<String> jcmbNumero;
-    private javax.swing.JComboBox<String> jcmbProvincia;
     private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
 
@@ -253,37 +192,9 @@ public class VentanaListaPropietarios1Pruba extends javax.swing.JFrame {
         }
     }
 
-    private String[] creaModeloComoboNumeros() {
-        try {
-            ArrayList numeros;
-            numeros = DataBaseSegura.numeroDeCoches();
-            int n = numeros.size();
-            String[] numero = new String[n];
-            for (int i = 0; i < n; i++) {
-                numero[i] = numeros.get(i).toString();
-            }
-            return numero;
-        } catch (MyError ex) {
-            VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
-            return null;
-        }
+ 
+
+
     }
 
-    private String[] creaModeloComobo() {
-        try {
-            ArrayList ciudades = DataBaseSegura.provincias();
-            int n = ciudades.size();
-            String[] nombres = new String[n];
-            for (int i = 0; i < n; i++) {
-                Propietario p = (Propietario) ciudades.get(i);
-                System.out.println(p.getProvincia());
-                nombres[i] = p.getProvincia();
-            }
-            return nombres;
-        } catch (MyError ex) {
-            VentanaNotificaciones.ventanaError("ERRO", padre);
-            return null;
-        }
-    }
 
-}

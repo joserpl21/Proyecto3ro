@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import controlador.MyError;
@@ -16,16 +15,16 @@ public class Propietario {
     private String apellido;
     private String telefono;
     private String provincia;
-    
+
     /**
      * Contructor
+     *
      * @param dni cadena DNI de propietario
      * @param nombre cadena nombre del propietario
-     * @param apellido cadena apellido del propietario 
+     * @param apellido cadena apellido del propietario
      * @param telefono cadena telefono del propietario
      * @param provincia cadena provincia recibe el nombre de la provincia
      */
-
     public Propietario(String dni, String nombre, String apellido, String telefono, String provincia) {
         this.dni = dni;
         this.nombre = nombre;
@@ -37,24 +36,29 @@ public class Propietario {
     public Propietario() {
 
     }
+
     /**
-     * 
+     *
      * @param provincia cadena recive el nombre de la provincia
      */
     public Propietario(String provincia) {
         this.provincia = provincia;
     }
+
     /**
-     * 
+     *
      * @return dni cadena devuelve el DNI del propietario
      */
 
     public String getDni() {
         return dni;
     }
+
     /**
-     * Setter de la variable DNI de tipo cadena recive el DNI y comprueba que sea correcto
-     * @param dni de tipo cadena recive el DNI 
+     * Setter de la variable DNI de tipo cadena recive el DNI y comprueba que
+     * sea correcto
+     *
+     * @param dni de tipo cadena recive el DNI
      * @throws MyError guarda el error cuando el DNI ingreso es incorrecto
      */
 
@@ -76,18 +80,21 @@ public class Propietario {
             throw new MyError("FORMATO INCORRECTO DE DNI EJ: 78945612Y");
         }
     }
+
     /**
-     * 
+     *
      * @return nombre de tipo cadena devuelve el nombre
      */
 
     public String getNombre() {
         return nombre;
     }
+
     /**
-     * 
-     * @param nombre de tipo cadena recive el nombre y comprueba que este correcto
-     * @throws MyError  guarda el error del nombre
+     *
+     * @param nombre de tipo cadena recive el nombre y comprueba que este
+     * correcto
+     * @throws MyError guarda el error del nombre
      */
 
     public void setNombre(String nombre) throws MyError {
@@ -103,17 +110,21 @@ public class Propietario {
             throw new MyError("Error al introducir el nombre  ");
         }
     }
+
     /**
-     * 
+     *
      * @return apellido de tipo cadena recive el apellido del propietario
      */
 
     public String getApellido() {
         return apellido;
     }
+
     /**
-     * Setter de la variable apellido recive el apellido y comprueba que sea correcto
-     * @param apellido de tipo cadena recive el apellido 
+     * Setter de la variable apellido recive el apellido y comprueba que sea
+     * correcto
+     *
+     * @param apellido de tipo cadena recive el apellido
      * @throws MyError guarda el error cuando el apellido es incorrecto
      */
 
@@ -131,17 +142,21 @@ public class Propietario {
         }
         this.apellido = apellido;
     }
+
     /**
-     * 
+     *
      * @return telefono de tipo cadena devuelve el telefono
      */
 
     public String getTelefono() {
         return telefono;
     }
+
     /**
-     * Setter de la variable telefono recive el telefono del propietario y comprueba que sea correcto
-     * @param telefono de tipo cadena recive el telefono del propieario 
+     * Setter de la variable telefono recive el telefono del propietario y
+     * comprueba que sea correcto
+     *
+     * @param telefono de tipo cadena recive el telefono del propieario
      * @throws MyError si el telefono es incorrecto guardara el error
      */
 
@@ -159,17 +174,20 @@ public class Propietario {
             throw new MyError("Telefono mal ingresado");
         }
     }
+
     /**
-     * 
+     *
      * @return provincia de tipo cadena revuelve el nombre de la provincia
      */
-    
 
     public String getProvincia() {
         return provincia;
     }
+
     /**
-     * Setter de la variable provincia recive el nombre de la provincia y comprueba que este correcto
+     * Setter de la variable provincia recive el nombre de la provincia y
+     * comprueba que este correcto
+     *
      * @param provincia de tipo cadena recive el nombre de la provincia
      * @throws MyError guarda el error si no cumple con el patron
      */
@@ -188,8 +206,9 @@ public class Propietario {
         }
 
     }
+
     /**
-     * 
+     *
      * @return vactor array de cadenas revuelve todos los datos del propietario
      */
 
@@ -202,13 +221,16 @@ public class Propietario {
         vector[4] = provincia;
         return vector;
     }
+
     /**
-     * Metodo booleano que recive la cadena de DNI y comprueba que la letra sea correcta
+     * Metodo booleano que recive la cadena de DNI y comprueba que la letra sea
+     * correcta
+     *
      * @param dni de tipo cadena recive el DNI
      * @return boolean dependiendo de que el DNI sea o no correcto
-     * @throws MyError guarda error 
+     * @throws MyError guarda error
      */
-    
+
     private boolean confirmarDNI(String dni) throws MyError {
         try {
             String cadena = "TRWAGMYFPDXBNJZSQVHLCKE";

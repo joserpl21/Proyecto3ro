@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package InterfazG;
 
 import Modelo.DataBaseSegura;
 import Modelo.Propietario;
 import controlador.MyError;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author Alumno
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -167,17 +160,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAñadirVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAñadirVeActionPerformed
+        //Abre la ventana de añadir vehiculo
         VentanaAñadirVehiculo v = new VentanaAñadirVehiculo(this);
         setVisible(false);
     }//GEN-LAST:event_jbAñadirVeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //abre la ventana Añadir propietario
         VentanaAñadirPropietario p = new VentanaAñadirPropietario(this);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbListaVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListaVehiculosActionPerformed
         try {
+            //Abre la ventana lista vehiculo si habria algun error guardado lo lanza
+
             ArrayList listaVehiculos = DataBaseSegura.consultaVehiculos();
             if (listaVehiculos.size() > 0) {
                 VentanaListaVehiculos lv = new VentanaListaVehiculos(this);
@@ -189,14 +186,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbListaVehiculosActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Abre la ventana lista Propieatario
         VentanaBajaPropietario c = new VentanaBajaPropietario(this);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         try {
-            System.exit(0);
+            //Cierra la coneion y termina el programa
             DataBaseSegura.cerrarConexion();
+            System.exit(0);
+
         } catch (MyError ex) {
             VentanaNotificaciones.ventanaError(ex.getMessage(), this);
         }
@@ -204,6 +204,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jbListaPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListaPropActionPerformed
         try {
+            //Abre la ventana lista propieatarios y le pasa el arraylist de todos los propieatarios
+            //sacados de la base de datos.
             ArrayList<Propietario> p = DataBaseSegura.listaPropietariosSolos();
             VentanaListaPropietarios s = new VentanaListaPropietarios(this, p);
             setVisible(false);
@@ -215,6 +217,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jbExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExportarActionPerformed
 
         try {
+            //Pasa la lista de vehiculos y la lista de todos los propietarios
             ArrayList listaVehiculo = DataBaseSegura.consultaVehiculos();
             ArrayList listaPropietarios = DataBaseSegura.listaPropietariosSolos();
             VentanaExportarXML xml = new VentanaExportarXML(this, listaVehiculo, listaPropietarios);
@@ -225,17 +228,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbExportarActionPerformed
 
     private void jbSalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalorActionPerformed
-        System.exit(0);
+
         try {
+            //cierra la conexion ala base de datos y termina el programa
             DataBaseSegura.cerrarConexion();
+            System.exit(0);
         } catch (MyError ex) {
             VentanaNotificaciones.ventanaError(ex.getMessage(), this);
         }
     }//GEN-LAST:event_jbSalorActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

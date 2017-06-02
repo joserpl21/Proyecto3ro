@@ -1,11 +1,9 @@
 package InterfazG;
 
 import Modelo.Propietario;
-import Modelo.Vehiculo;
+import Modelo.Vehículo;
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,7 +12,6 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -27,7 +24,7 @@ import org.w3c.dom.Text;
 public class VentanaExportarXML extends javax.swing.JFrame {
 
     JFrame padre;
-    ArrayList<Vehiculo> listaVehiculos;
+    ArrayList<Vehículo> listaVehiculos;
     ArrayList<Propietario> listaPropietario;
     /**
      * Cosntructor que recive el JFrame de la ventana principal y el arraylist de todos los propietarios junto con el arraylist de todos los vehiculos
@@ -135,7 +132,8 @@ public class VentanaExportarXML extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //Escribe 
+       //Escribe en un documento xml de todos los vehiculos teniendo en cuenta a sus propietarios y escribe su nombre y apellido 
+       //lo guarda con el nombre del JTextField 
         String nombre = tfNombreDocumento.getText();
         DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
@@ -145,9 +143,9 @@ public class VentanaExportarXML extends javax.swing.JFrame {
             Document documento = implentacion.createDocument(null, "vehiculos", null);
             documento.setXmlVersion("1.0");
             Element raiz = documento.getDocumentElement();
-            ListIterator<Vehiculo> itVe = listaVehiculos.listIterator();
+            ListIterator<Vehículo> itVe = listaVehiculos.listIterator();
             while (itVe.hasNext()) {
-                Vehiculo v = itVe.next();
+                Vehículo v = itVe.next();
                 Element etiquetaVehiculo = documento.createElement("vehiculo");
                 Element etiquetaModelo = documento.createElement("modelo");
                 Element etiquetaAnio = documento.createElement("anio");
@@ -190,11 +188,13 @@ public class VentanaExportarXML extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Hace visible a la venatana padre
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Hace visible a la venatana padre
         padre.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
@@ -208,6 +208,7 @@ public class VentanaExportarXML extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiaPantalla() {
+        //limpia el JTextField
         tfNombreDocumento.setText("");
     }
 }

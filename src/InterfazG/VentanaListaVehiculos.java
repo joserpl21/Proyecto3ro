@@ -7,11 +7,9 @@ package InterfazG;
 
 import Modelo.DataBaseSegura;
 import Modelo.Propietario;
-import Modelo.Vehiculo;
+import Modelo.Vehículo;
 import controlador.MyError;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,16 +23,22 @@ public class VentanaListaVehiculos extends javax.swing.JFrame {
      * Creates new form VentanaListaVehiculos
      */
     JFrame padre;
-    ArrayList<Vehiculo> listaVehiculos;
+    ArrayList<Vehículo> listaVehiculos;
     ArrayList<Propietario> listaPropietarios;
-    Vehiculo v;
+    Vehículo v;
     int n = 0;
-    
+
+    /**
+     * Constructor
+     *
+     * @param padre recive el JFrame de la ventana principal inicialisa al
+     * arrayList de vehiculos luego rellena la tabla y llama al metodo
+     * seleccionTabla , si abria algun error guardado lo lanza
+     */
+
     public VentanaListaVehiculos(JFrame padre) {
         try {
             initComponents();
-//            this.listaVehiculos = lista;
-//            this.listaPropietarios = lista2;
             this.padre = padre;
             setVisible(true);
             listaVehiculos = DataBaseSegura.consultaVehiculos();
@@ -44,8 +48,16 @@ public class VentanaListaVehiculos extends javax.swing.JFrame {
             VentanaNotificaciones.ventanaError(ex.getMessage(), padre);
         }
     }
-    
-    public VentanaListaVehiculos(ArrayList<Vehiculo> lista) {
+
+    /**
+     * Constructor que recive un Arraylist de vehiculos para inicializar la
+     * listaVehiculos
+     *
+     * @param lista Arraylist de la clase vehiculo para rellenar la tabla
+     *
+     */
+
+    public VentanaListaVehiculos(ArrayList<Vehículo> lista) {
         try {
             initComponents();
             setVisible(true);
@@ -56,7 +68,7 @@ public class VentanaListaVehiculos extends javax.swing.JFrame {
         }
         seleccionTabla();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -154,21 +166,27 @@ public class VentanaListaVehiculos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Hace que el JFrame de la ventana Principal sea visible
         padre.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void jbAnadirProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnadirProActionPerformed
+        //Se activa cuando este seleccionado una fila si seleccionas varios tomara solo la primera seleccionada
         VentanaNuevoPropietario n = new VentanaNuevoPropietario(v, this);
         setVisible(false);
     }//GEN-LAST:event_jbAnadirProActionPerformed
 
     private void jtListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMouseClicked
+        //Saca la posicion del arrayList y lo guarda en el objeto de la clase vehiculo
         seleccionTabla();
         v = listaVehiculos.get(n - 1);
     }//GEN-LAST:event_jtListaMouseClicked
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
         try {
+            /**
+             * Hace visible la ventana principal y oculta esta ventana
+             */
             padre.setVisible(true);
             dispose();
         } catch (NullPointerException e) {
@@ -187,18 +205,27 @@ public class VentanaListaVehiculos extends javax.swing.JFrame {
     private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * rellena la tabla con el ArrayList vehiculos
+     *
+     * @throws MyError
+     */
     private void rellenaTabla() throws MyError {
         DefaultTableModel modeloTabla = (DefaultTableModel) jtLista.getModel();
-        for (Vehiculo v : listaVehiculos) {
+        for (Vehículo v : listaVehiculos) {
             modeloTabla.addRow(v.toArray());
         }
     }
-    
+
+    /**
+     * Metodo que devuelve la fila seleccionada
+     */
+
     private void seleccionTabla() {
         n = jtLista.getSelectedRow() + 1;
         if (n > 0) {
             jbAnadirPro.setEnabled(true);
         }
     }
-    
+
 }

@@ -3,7 +3,7 @@ package InterfazG;
 
 import Modelo.DataBaseSegura;
 import Modelo.Propietario;
-import Modelo.Vehiculo;
+import Modelo.Vehículo;
 import controlador.MyError;
 import javax.swing.JFrame;
 
@@ -17,7 +17,7 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
      * Creates new form VentanaAñadirVehiculo
      */
     JFrame padre;
-    Vehiculo a;
+    Vehículo a;
     Propietario p;
     /**
      * Constructor
@@ -25,7 +25,7 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
      * inicializa un nuevo objeto de la clase padre
      */
     public VentanaAñadirVehiculo(JFrame padre) {
-        a = new Vehiculo();
+        a = new Vehículo();
         this.padre = padre;
         initComponents();
         setVisible(true);
@@ -273,7 +273,7 @@ public class VentanaAñadirVehiculo extends javax.swing.JFrame {
         tfMatricula.setText("");
         tfModelo.setText("");
         tfPropietario.setText("");
-        a = new Vehiculo();
+        a = new Vehículo();
         p = new Propietario();
     }
 }

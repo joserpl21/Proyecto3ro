@@ -1,29 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package InterfazG;
 
 import Modelo.DataBaseSegura;
-import Modelo.Vehiculo;
+import Modelo.Vehículo;
 import controlador.MyError;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
  *
- * @author Alumno
+ * @author Jhosep Joel Mendoza Lazo
  */
 public class VentanaNuevoPropietario extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaNuevoPropietario
      */
-    Vehiculo v;
+    Vehículo v;
     JFrame padre;
 
-    public VentanaNuevoPropietario(Vehiculo v, JFrame padre) {
+    /**
+     * Constructor que recibe un vehiculo y un JFrame
+     * @param v objeto de la clase Vehiculo para sacar sus datos
+     * @param padre JFrame de la ventana que lo llama
+     */
+    public VentanaNuevoPropietario(Vehículo v, JFrame padre) {
         this.padre = padre;
         initComponents();
         setVisible(true);
@@ -137,9 +138,15 @@ public class VentanaNuevoPropietario extends javax.swing.JFrame {
 
     private void jbAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAsignarActionPerformed
         try {
+            /**
+             * Boton que actualiza al vehiculo mediante nuevo DNi de su nuevo propietario
+             * Llama a la ventanalistaVehiculos con el arrayList sacado de la base de datos
+             * para que actualize la lista
+             */
+            
             DataBaseSegura.actualizaVehiculo(v, tfDni.getText());
             VentanaNotificaciones.ventanaOK("VAHICULO ACTUALIZADO!", this);
-            ArrayList<Vehiculo> listas = DataBaseSegura.consultaVehiculos();
+            ArrayList<Vehículo> listas = DataBaseSegura.consultaVehiculos();
             VentanaListaVehiculos v = new VentanaListaVehiculos(listas);
             setVisible(false);
             padre.setVisible(false);
@@ -153,18 +160,16 @@ public class VentanaNuevoPropietario extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDniActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Hace visible la ventana del JFrame que le llama y oculta este
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Hace visible la ventana del JFrame que le llama y oculta este
         padre.setVisible(true);
         dispose();
     }//GEN-LAST:event_formWindowClosed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

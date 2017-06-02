@@ -8,43 +8,53 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class DataBaseSegura {
-    
 
     public static Connection conexion;
-    
+
     /**
      * Metodo que inicializa a la variable conexion
-     * @param user recive el nombre del usuario para la conexion a la base de datos
+     *
+     * @param user recive el nombre del usuario para la conexion a la base de
+     * datos
      * @param pass recive la contraseña para conextar con la base de datos
-     * @throws SQLException guarda todos los errores que surjan al hacer la conexion
+     * @throws SQLException guarda todos los errores que surjan al hacer la
+     * conexion
      */
     private static void conectar(String user, String pass) throws SQLException {
         String db = "vehiculos";
         String servidorMysql = "jdbc:mysql://localhost/";
         conexion = DriverManager.getConnection(servidorMysql + db, user, pass);
     }
+
     /**
      * Metodo que carga el driver de la libreria mysql
-     * @throws ClassNotFoundException 
+     *
+     * @throws ClassNotFoundException
      */
     private static void cargarDriver() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
     }
+
     /**
      * Metodo que cierra la conexion con la base de datos
+     *
      * @throws MyError guarda el error si surgiera
      */
-    public static void cerrarConexion() throws MyError{
+    public static void cerrarConexion() throws MyError {
         try {
-            conexion.close();
+            if (conexion != null) {
+                conexion.close();
+            }
         } catch (SQLException ex) {
             throw new MyError("Imposible cerrar la base de datos");
         }
     }
+
     /**
-     * Metodo que recive dos cadenas y carga el Driver para luego hacer la conexcion si surgiera algun error seria controlado
+     * Metodo que recive dos cadenas y carga el Driver para luego hacer la
+     * conexcion si surgiera algun error seria controlado
+     *
      * @param user de tipo cadena necesaria enviarla al metodo conectar
      * @param pass de tipo cadena necesaria enviarla al metodo conectar
      * @return boolean dependiendo si se logra conectar devolvera true o false
@@ -72,11 +82,17 @@ public class DataBaseSegura {
             throw new MyError("No se ha creado la libreria " + ex.getMessage());
         }
     }
+
     /**
-     * Metodo que devuelve un objeto de la clase propietario buscandola en la base de datos con la cadena de ingreso que sera el DNI del propietario
-     * @param dni de tipo cadena recive el DNI del propietario para luego buscarlo en la base de datos
-     * @return propietario si encuentra algun propietario en la base de datos con el DNI 
-     * @throws MyError si habria algun error al sacar al propietario guardaria el error
+     * Metodo que devuelve un objeto de la clase propietario buscandola en la
+     * base de datos con la cadena de ingreso que sera el DNI del propietario
+     *
+     * @param dni de tipo cadena recive el DNI del propietario para luego
+     * buscarlo en la base de datos
+     * @return propietario si encuentra algun propietario en la base de datos
+     * con el DNI
+     * @throws MyError si habria algun error al sacar al propietario guardaria
+     * el error
      */
     public static Propietario buscaPropietario(String dni) throws MyError {
         String cadena = "SELECT * FROM propietario WHERE dni=?;";
@@ -112,13 +128,17 @@ public class DataBaseSegura {
 
         }
     }
+
     /**
-     * Metodo que devuelve un ArrayList de vehiculos que se encuentra en la base de datos
-     * @return ArrayList devuelve la lista de propietarios que hay en la base de datos
-     * @throws MyError guarda el error que lanzaria la base de datos 
+     * Metodo que devuelve un ArrayList de vehiculos que se encuentra en la base
+     * de datos
+     *
+     * @return ArrayList devuelve la lista de propietarios que hay en la base de
+     * datos
+     * @throws MyError guarda el error que lanzaria la base de datos
      */
-    public static ArrayList<Vehiculo> consultaVehiculos() throws MyError {
-        ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+    public static ArrayList<Vehículo> consultaVehiculos() throws MyError {
+        ArrayList<Vehículo> listaVehiculos = new ArrayList<>();
         PreparedStatement pS = null;
         ResultSet rS = null;
         String sentencia = "SELECT v.MATRICULA, v.MODELO , v.ANIO , v.propietario ,p.nombre FROM vehiculo v JOIN PROPIETARIO p on v.PROPIETARIO=p.DNI ORDER BY v.ANIO";
@@ -127,7 +147,7 @@ public class DataBaseSegura {
             pS = conexion.prepareStatement(sentencia);
             rS = pS.executeQuery();
             while (rS.next()) {
-                Vehiculo v = new Vehiculo(rS.getString(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5));
+                Vehículo v = new Vehículo(rS.getString(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5));
                 listaVehiculos.add(v);
             }
             return listaVehiculos;
@@ -151,11 +171,17 @@ public class DataBaseSegura {
 
         }
     }
+
     /**
-     * Metodo que devuelve un ArrayList de todos lo propietarios que tengan una determinanda provincia y un determinado numero de vehiculos
-     * @param provincia de tipo cadena recive el nombre de la provincia para buscarla en la base de datos
-     * @param n de tipo entero recive el numero de vehiculos que tiene ese propietario
-     * @return ArrayList devuelve una lista con todos los propietarios con esas descripciones
+     * Metodo que devuelve un ArrayList de todos lo propietarios que tengan una
+     * determinanda provincia y un determinado numero de vehiculos
+     *
+     * @param provincia de tipo cadena recive el nombre de la provincia para
+     * buscarla en la base de datos
+     * @param n de tipo entero recive el numero de vehiculos que tiene ese
+     * propietario
+     * @return ArrayList devuelve una lista con todos los propietarios con esas
+     * descripciones
      * @throws MyError guardara el error si no se podria concretar la consulta
      */
     public static ArrayList<Propietario> listaPropietarios(String provincia, int n) throws MyError {
@@ -233,11 +259,14 @@ public class DataBaseSegura {
 //        }
 //    }
     /**
-     * Metodo que recive un objeto de la clase vehiculo para luego tomar sus variables y subirlas creando un nuevo vehiculo en la base de datos
-     * @param e objeto de la clase Vehiculo 
-     * @throws MyError guarda el error si habria algun problema al guardar vehiculo
+     * Metodo que recive un objeto de la clase vehiculo para luego tomar sus
+     * variables y subirlas creando un nuevo vehiculo en la base de datos
+     *
+     * @param e objeto de la clase Vehículo
+     * @throws MyError guarda el error si habria algun problema al guardar
+     * vehiculo
      */
-    public static void guardaVehiculo(Vehiculo e) throws MyError {
+    public static void guardaVehiculo(Vehículo e) throws MyError {
         String cadena = "INSERT INTO `vehiculo`(`matricula`, `modelo`, `anio`, `propietario`) VALUES (?,?,?,?);";
         PreparedStatement st = null;
         try {
@@ -295,14 +324,20 @@ public class DataBaseSegura {
 //        }
 //
 //    }
+
     /**
-     * Metodo que actualiza el vehiculo en la base de datos tiene como entrada 
-     * un objeto de la clase vehiculo y una cadena que seria el DNI del propietario
-     * @param v objeto de la clase vehiculo que seria el vehiculoa la que haique actualizar los datos
-     * @param dni de tipo cadena que recive el DNI del propietario del vehiculo para guardarlo
-     * @throws MyError si habria algun error al ejecutar la consulta se lanzaria un mensaje
+     * Metodo que actualiza el vehiculo en la base de datos tiene como entrada
+     * un objeto de la clase vehiculo y una cadena que seria el DNI del
+     * propietario
+     *
+     * @param v objeto de la clase vehiculo que seria el vehiculoa la que haique
+     * actualizar los datos
+     * @param dni de tipo cadena que recive el DNI del propietario del vehiculo
+     * para guardarlo
+     * @throws MyError si habria algun error al ejecutar la consulta se lanzaria
+     * un mensaje
      */
-    public static void actualizaVehiculo(Vehiculo v, String dni) throws MyError {
+    public static void actualizaVehiculo(Vehículo v, String dni) throws MyError {
         String cadena = "UPDATE vehiculo SET propietario=? WHERE matricula=?";
         PreparedStatement st = null;
         try {
@@ -322,10 +357,15 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
-     * metodo que guarda al propietario en la base de datos reciviendo un objeto de la clase propietario para sacar sus datos
-     * @param p objeto de la clase propietario tendra los datos del propietario que haique guardar
-     * @throws MyError si habria algun error al ejecutar la consulta se guardaria el error
+     * metodo que guarda al propietario en la base de datos reciviendo un objeto
+     * de la clase propietario para sacar sus datos
+     *
+     * @param p objeto de la clase propietario tendra los datos del propietario
+     * que haique guardar
+     * @throws MyError si habria algun error al ejecutar la consulta se
+     * guardaria el error
      */
     public static void guardaPropietario(Propietario p) throws MyError {
         String cadena = "INSERT INTO propietario VALUES(?,?,?,?,?);";
@@ -352,11 +392,15 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
-     * Metodo que elimina un vehiculo de la base de datos recive el DNI del propietario para hacerlo
+     * Metodo que elimina un vehiculo de la base de datos recive el DNI del
+     * propietario para hacerlo
+     *
      * @param propietario de tipo cadena recive el DNI de su propietario
      * @return n entero dependiendo de la filas borradas en la base de datos
-     * @throws MyError si habria algun error al ejecutar la consulta guardaria el error
+     * @throws MyError si habria algun error al ejecutar la consulta guardaria
+     * el error
      */
     public static int eliminarVehiculo(String propietario) throws MyError {
         String cadena = "Delete FROM vehiculo WHERE propietario=?";
@@ -379,9 +423,13 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
-     * Metodo que elimina a un propietario de la base de datos cuando reciva el DNI 
-     * @param dni de tipo cadena recive el DNI del propietario para ejecutar la consulta
+     * Metodo que elimina a un propietario de la base de datos cuando reciva el
+     * DNI
+     *
+     * @param dni de tipo cadena recive el DNI del propietario para ejecutar la
+     * consulta
      * @return n entero devuelve el numero de filas eliminas en la base de datos
      * @throws MyError guarda el error si se diera el caso
      */
@@ -406,8 +454,10 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
      * Metodo que devuelve a todos los propietarios de la base de datos
+     *
      * @return listaProp lista de todos los propietarios
      * @throws MyError guarda el error al ejecutar la consulta
      */
@@ -443,11 +493,16 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
      * Metodo que devuelve la lista de propietarios segun su numero de coches
-     * @param n de tipo entero recive el numero de coches que tiene cada propietario
-     * @return listaProp  lista de todos los vehiculos que cumplan con la condicion
-     * @throws MyError si habria algun error al hacer la consulta guardaria el error
+     *
+     * @param n de tipo entero recive el numero de coches que tiene cada
+     * propietario
+     * @return listaProp lista de todos los vehiculos que cumplan con la
+     * condicion
+     * @throws MyError si habria algun error al hacer la consulta guardaria el
+     * error
      */
     public static ArrayList<Propietario> listaPropietariosNumeroDeCoches(int n) throws MyError {
         ArrayList<Propietario> listaProp = new ArrayList<>();
@@ -482,10 +537,15 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
-     * Metodo que devuelve una lista dependiendo de la provincia en que se encuentre el propieario
-     * @param prinvincia de tipo cadena almacena el nombre de la provincia del propieario
-     * @return listaProp lista de todos los propietarios que esten en la provincia introducida
+     * Metodo que devuelve una lista dependiendo de la provincia en que se
+     * encuentre el propieario
+     *
+     * @param prinvincia de tipo cadena almacena el nombre de la provincia del
+     * propieario
+     * @return listaProp lista de todos los propietarios que esten en la
+     * provincia introducida
      * @throws MyError si la consulta no se llevaria acabo guardara el error
      */
     public static ArrayList<Propietario> listaPropietariosProvincia(String prinvincia) throws MyError {
@@ -521,15 +581,20 @@ public class DataBaseSegura {
             }
         }
     }
+
     /**
-     * Metodo que devuelve la lista de vehiculos que tengan el DNI del propietario 
-     * @param propietario de tipo cadena recive el DNI del propietario para utilizarlo en la base de datos
-     * @return listaVehiculosPro lista de todos los vehiculos que tengan el mismo propieatario 
+     * Metodo que devuelve la lista de vehiculos que tengan el DNI del
+     * propietario
+     *
+     * @param propietario de tipo cadena recive el DNI del propietario para
+     * utilizarlo en la base de datos
+     * @return listaVehiculosPro lista de todos los vehiculos que tengan el
+     * mismo propieatario
      * @throws MyError si la consulta no se ejecutaria guardara el error
      */
 
-    public static ArrayList<Vehiculo> listaVehiculosPro(String propietario) throws MyError {
-        ArrayList<Vehiculo> listaVehiculosPro = new ArrayList<>();
+    public static ArrayList<Vehículo> listaVehiculosPro(String propietario) throws MyError {
+        ArrayList<Vehículo> listaVehiculosPro = new ArrayList<>();
         PreparedStatement pS = null;
         String sentencia = "SELECT * FROM vehiculo WHERE propietario=?";
         ResultSet rS = null;
@@ -538,7 +603,7 @@ public class DataBaseSegura {
             pS.setString(1, propietario);
             rS = pS.executeQuery();
             while (rS.next()) {
-                Vehiculo v = new Vehiculo(rS.getString(1), rS.getString(2), rS.getString(3), rS.getString(4));
+                Vehículo v = new Vehículo(rS.getString(1), rS.getString(2), rS.getString(3), rS.getString(4));
                 listaVehiculosPro.add(v);
             }
             return listaVehiculosPro;
@@ -551,7 +616,7 @@ public class DataBaseSegura {
                 } catch (SQLException ex) {
                     throw new MyError(ex.getMessage() + ex.getSQLState());
                 }
-            }   
+            }
             if (rS != null) {
                 try {
                     rS.close();
